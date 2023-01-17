@@ -13,7 +13,7 @@ MSG_BATCH = 10
 
 # ================================================
 # init Discord client
-channels_to_read = {'discord-anns'}
+channels_to_read = set(os.environ.get('DISCORD_CHANNELS').split('@'))
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -21,7 +21,7 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 # ================================================
 # init Telegram client
-channels_to_fwd = {'ggggfhjvv'}
+channels_to_fwd = set(os.environ.get('TELEGRAM_CHANNELS').split('@'))
 api_id = os.environ.get('TELEGRAM_API_ID', '')
 api_hash = os.environ.get('TELEGRAM_API_HASH', '')
 
