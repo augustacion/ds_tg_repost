@@ -2,7 +2,6 @@ from datetime import datetime
 import os
 
 from dotenv import load_dotenv
-from telethon import TelegramClient, sync
 import telegram
 import asyncio
 import discord
@@ -24,8 +23,6 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 # ================================================
 # init Telegram client
 channels_to_fwd = set(os.environ.get('TELEGRAM_CHANNELS').split('@'))
-api_id = os.environ.get('TELEGRAM_API_ID', '')
-api_hash = os.environ.get('TELEGRAM_API_HASH', '')
 
 tg_client = telegram.Bot(os.environ.get('TELEGRAM_BOT_TOKEN', ''))
 
