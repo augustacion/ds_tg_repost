@@ -7,6 +7,8 @@ import asyncio
 import discord
 from discord.ext import commands
 
+from server import keep_alive
+
 load_dotenv()
 TIMEOUT = 20
 MSG_BATCH = 10
@@ -45,4 +47,5 @@ async def on_message(message):
             await client.send_message(channel, f"{message.content}\n{message.jump_url}")
 
 
+keep_alive()
 bot.run(os.environ.get('DISCORD_BOT_TOKEN'))
