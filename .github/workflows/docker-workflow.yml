@@ -17,8 +17,8 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
-          CR_REGISTRY: ${{env.CR_REGISTRY}}
-          CR_REPOSITORY: ${{env.CR_REPOSITORY}}
+          CR_REGISTRY: ${{ env.CR_REGISTRY }}
+          CR_REPOSITORY: ${{ env.CR_REPOSITORY }}
         run: |
           docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest .
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
