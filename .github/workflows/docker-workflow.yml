@@ -46,9 +46,12 @@ jobs:
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
             DISCORD_CHANNELS=${{ vars.DISCORD_CHANNELS }}
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
-      - name: Trigger container via API
+      - name: IAM Token
+        id: iam-token
+        uses: yc-actions/yc-iam-token@v1
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
+      - name: Trigger Container
         id: trigger
-        run: |
-          curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash -s -- -h
-          yc config set token ${{ secrets.OAUTH_TOKEN }}
-          curl -H {"Authorizaton": "Bearer ($yc iam create-token)"} https://${{ steps.deploy-sls-container.outputs.id }}.containers.yandexcloud.net
+        run:
+          curl -H {"Authorizaton": "Bearer ${{ steps.iam-token.outputs.token }}"} https://${{ steps.deploy-sls-container.outputs.id }}.containers.yandexcloud.net
