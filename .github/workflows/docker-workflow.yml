@@ -1,38 +1,44 @@
-name: ci
+name: Push To Yandex Cloud CR
+
 on:
   push:
     branches:
-      - 'main'
+      main
+  workflow_dispatch:
+
 jobs:
-  docker-login:
-    name: Login to Yandex Cloud Container Registry
-    id: login-cr
-    uses: yc-actions/yc-cr-login@v2
-    with:
-      yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-  docker-build:
-    name: Build, tag, and push image to Yandex Cloud Container Registry
-    env:
-      CR_REGISTRY: ${{env.CR_REGISTRY}}
-      CR_REPOSITORY: ${{env.CR_REPOSITORY}}
-    run: |
-      docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest .
-      docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
-  docker-deploy:
-    name: Deploy Serverless Container
-    id: deploy-sls-container
-    uses: yc-actions/yc-sls-container-deploy@v2
-    env:
-      CR_REGISTRY: ${{env.CR_REGISTRY}}
-      CR_REPOSITORY: ${{env.CR_REPOSITORY}}
-    with:
-      yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-      container-name: ds2tgbot
-      folder-id: ${{env.FOLDER_ID}}
-      revision-service-account-id: ${{env.SERVICE_ACCOUNT_ID}}
-      revision-cores: 1
-      revision-memory: 512Mb
-      revision-core-fraction: 100
-      revision-concurrency: 8
-      revision-image-url: cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
-      revision-execution-timeout: 10
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Yandex Cloud CR "Login" Action for GitHub Actions
+        uses: yc-actions/yc-cr-login@v2
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+      - name: Build, tag, and push image to Yandex Cloud Container Registry
+        env:
+          CR_REGISTRY: ${{env.CR_REGISTRY}}
+          CR_REPOSITORY: ${{env.CR_REPOSITORY}}
+        run: |
+          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest .
+          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Serverless Container
+        id: deploy-sls-container
+        uses: yc-actions/yc-sls-container-deploy@v2
+        env:
+          CR_REGISTRY: ${{env.CR_REGISTRY}}
+          CR_REPOSITORY: ${{env.CR_REPOSITORY}}
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          container-name: ds2tgbot
+          folder-id: ${{env.FOLDER_ID}}
+          revision-service-account-id: ${{env.SERVICE_ACCOUNT_ID}}
+          revision-cores: 1
+          revision-memory: 512Mb
+          revision-core-fraction: 100
+          revision-concurrency: 8
+          revision-image-url: cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
+          revision-execution-timeout: 10
