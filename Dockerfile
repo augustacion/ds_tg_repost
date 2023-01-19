@@ -19,11 +19,11 @@ RUN poetry install --no-root
 
 COPY main.py .
 
+FROM base as prod
+
+CMD ["python", "main.py"]
+
 FROM base as dev
 
 COPY .env .
-CMD ["python", "main.py"]
-
-FROM base as prod
-
 CMD ["python", "main.py"]
