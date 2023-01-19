@@ -54,4 +54,4 @@ jobs:
       - name: Trigger Container
         id: trigger
         run: >
-          curl -H "Connection: close" -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" https://${{ steps.deploy-sls-container.outputs.id }}.containers.yandexcloud.net
+          curl -H "Connection: close" -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" -m 10 https://${{ steps.deploy-sls-container.outputs.id }}.containers.yandexcloud.net
