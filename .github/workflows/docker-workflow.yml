@@ -48,6 +48,5 @@ jobs:
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
       - name: Trigger container via API
         id: trigger
-        uses: wei/curl@v1
-        with:
-          args: https://${{ steps.deploy-sls-container.outputs.rev }}.containers.yandexcloud.net
+        run: |
+          curl https://${{ steps.deploy-sls-container.outputs.rev }}.containers.yandexcloud.net
