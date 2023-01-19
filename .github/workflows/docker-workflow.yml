@@ -41,7 +41,7 @@ jobs:
           revision-concurrency: 8
           revision-image-url: cr.yandex/${{ vars.CR_REGISTRY }}/${{ vars.CR_REPOSITORY }}:latest
           revision-execution-timeout: 10
-          revision-env: >
+          revision-env: |
             DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }}
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
             DISCORD_CHANNELS=${{ vars.DISCORD_CHANNELS }}
