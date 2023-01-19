@@ -53,5 +53,5 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
       - name: Trigger Container
         id: trigger
-        run:
+        run: |
           curl -H {"Authorizaton": "Bearer ${{ steps.iam-token.outputs.token }}"} https://${{ steps.deploy-sls-container.outputs.id }}.containers.yandexcloud.net
