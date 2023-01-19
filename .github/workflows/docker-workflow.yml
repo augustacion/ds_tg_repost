@@ -38,7 +38,7 @@ jobs:
           revision-cores: 1
           revision-memory: 512Mb
           revision-core-fraction: 100
-          revision-concurrency: 8
+          revision-concurrency: 1
           revision-image-url: cr.yandex/${{ vars.CR_REGISTRY }}/${{ vars.CR_REPOSITORY }}:latest
           revision-execution-timeout: 10
           revision-env: |
@@ -46,3 +46,8 @@ jobs:
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
             DISCORD_CHANNELS=${{ vars.DISCORD_CHANNELS }}
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
+      - name: Trigger container via API
+        id: trigger
+        uses: wei/curl@v1
+        with:
+          args: -X POST https://${{ steps.deploy-sls-container.outputs.rev }}.containers.yandexcloud.net
