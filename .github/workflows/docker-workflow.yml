@@ -49,4 +49,4 @@ jobs:
       - name: Trigger container via API
         id: trigger
         run: |
-          curl https://${{ steps.deploy-sls-container.outputs.rev }}.containers.yandexcloud.net
+          curl https://${{ steps.deploy-sls-container.outputs.id }}.containers.yandexcloud.net
