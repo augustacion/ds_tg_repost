@@ -1,5 +1,5 @@
 build:
 	docker build --tag bot .
 
-run:
+run: build
 	docker run bot
