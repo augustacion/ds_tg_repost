@@ -49,4 +49,6 @@ jobs:
       - name: Trigger container via API
         id: trigger
         run: |
-          curl https://${{ steps.deploy-sls-container.outputs.id }}.containers.yandexcloud.net
+          curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash -s -- -h
+          yc config set token ${{ secrets.OAUTH_TOKEN }}
+          curl -H {"Authorizaton": "Bearer ($yc iam create-token)"} https://${{ steps.deploy-sls-container.outputs.id }}.containers.yandexcloud.net
