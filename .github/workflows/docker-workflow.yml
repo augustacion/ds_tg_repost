@@ -50,4 +50,4 @@ jobs:
         id: trigger
         uses: wei/curl@v1
         with:
-          args: -X POST https://${{ steps.deploy-sls-container.outputs.rev }}.containers.yandexcloud.net
+          args: https://${{ steps.deploy-sls-container.outputs.rev }}.containers.yandexcloud.net
