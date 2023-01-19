@@ -36,7 +36,7 @@ jobs:
           CONTAINER_NAME: ${{ vars.CONTAINER_NAME }}
         with:
           yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
-          container-name: $CONTAINER_NAME
+          container-name: ${CONTAINER_NAME}
           folder-id: ${{ vars.FOLDER_ID }}
           revision-service-account-id: ${{ vars.SERVICE_ACCOUNT_ID }}
           revision-cores: 1
