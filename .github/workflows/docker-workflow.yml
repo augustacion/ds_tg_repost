@@ -54,4 +54,4 @@ jobs:
       - name: Trigger Container
         id: trigger
         run: >
-          curl -H {\"Authorizaton\": \"Bearer ${{ steps.iam-token.outputs.token }}\"} https://${{ steps.deploy-sls-container.outputs.id }}.containers.yandexcloud.net
+          curl -H \{\"Authorizaton\": \"Bearer ${{ steps.iam-token.outputs.token }}\"\} https://${{ steps.deploy-sls-container.outputs.id }}.containers.yandexcloud.net
