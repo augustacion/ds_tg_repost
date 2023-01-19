@@ -30,9 +30,6 @@ jobs:
       - name: Deploy Serverless Container
         id: deploy-sls-container
         uses: yc-actions/yc-sls-container-deploy@v2
-        env:
-          CR_REGISTRY: ${{ vars.CR_REGISTRY }}
-          CR_REPOSITORY: ${{ vars.CR_REPOSITORY }}
         with:
           yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
           container-name: ${{ vars.CONTAINER_NAME }}
@@ -42,5 +39,5 @@ jobs:
           revision-memory: 512Mb
           revision-core-fraction: 100
           revision-concurrency: 8
-          revision-image-url: cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
+          revision-image-url: cr.yandex/${{ vars.CR_REGISTRY }}/${{ vars.CR_REPOSITORY }}:latest
           revision-execution-timeout: 10
