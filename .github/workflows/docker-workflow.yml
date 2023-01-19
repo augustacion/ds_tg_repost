@@ -33,10 +33,9 @@ jobs:
         env:
           CR_REGISTRY: ${{ vars.CR_REGISTRY }}
           CR_REPOSITORY: ${{ vars.CR_REPOSITORY }}
-          CONTAINER_NAME: ${{ vars.CONTAINER_NAME }}
         with:
           yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
-          container-name: ${CONTAINER_NAME}
+          container-name: ${{ vars.CONTAINER_NAME }}
           folder-id: ${{ vars.FOLDER_ID }}
           revision-service-account-id: ${{ vars.SERVICE_ACCOUNT_ID }}
           revision-cores: 1
