@@ -46,13 +46,6 @@ jobs:
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
             DISCORD_CHANNELS=${{ vars.DISCORD_CHANNELS }}
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
-      - name: IAM Token
-        id: iam-token
-        uses: yc-actions/yc-iam-token@v1
-        with:
-          yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
-      - name: Trigger Container
-        id: trigger
-        run: |
-          bash -c 'while true; do output=$(curl -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" https://serverless-containers.api.cloud.yandex.net/containers/v1/containers\?folder_id\=${{ vars.FOLDER_ID }} | jq ".containers[] | select(.id == \"${{ steps.deploy-sls-container.outputs.id }}\").status"); if echo $output | grep -q "ACTIVE"; then exit 0; elif echo $output | grep -q "CREATING"; then sleep 1; else exit 1; fi; done'
-          curl -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" -m 20 https://${{ steps.deploy-sls-container.outputs.id }}.containers.yandexcloud.net || :
+      - name: Set repo variables related to container
+        id: set-vars
+        run: echo "::set-env name=CONTAINER_ID::${{ steps.deploy-sls-container.outputs.id }}"
