@@ -46,7 +46,3 @@ jobs:
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
             DISCORD_CHANNELS=${{ vars.DISCORD_CHANNELS }}
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
-  ping:
-    needs: deploy
-    uses: ./.github/workflows/ping.yml
-    secrets: inherit
