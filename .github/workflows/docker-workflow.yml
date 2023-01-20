@@ -1,24 +1,24 @@
-name: Push To Yandex Cloud CR
-
-on:
-  push:
-    branches:
-      main
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Yandex Cloud CR "Login" Action for GitHub Actions
-        uses: yc-actions/yc-cr-login@v1
-        with:
-          yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
-      - name: Build, tag, and push image to Yandex Cloud Container Registry
-        env:
-          CR_REGISTRY: ${{ vars.CR_REGISTRY }}
-          CR_REPOSITORY: ${{ vars.CR_REPOSITORY }}
-        run: |
-          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest --target prod .
-          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
+#name: Push To Yandex Cloud CR
+#
+#on:
+#  push:
+#    branches:
+#      main
+#  workflow_dispatch:
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#   steps:
+#      - uses: actions/checkout@v2
+#      - name: Yandex Cloud CR "Login" Action for GitHub Actions
+#        uses: yc-actions/yc-cr-login@v1
+#        with:
+#          yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
+#      - name: Build, tag, and push image to Yandex Cloud Container Registry
+#        env:
+#         CR_REGISTRY: ${{ vars.CR_REGISTRY }}
+#         CR_REPOSITORY: ${{ vars.CR_REPOSITORY }}
+#        run: |
+#         docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest --target prod .
+#         docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
