@@ -3,6 +3,7 @@ name: Curl Request
 on:
   schedule:
     - cron: '*/5 * * * *'
+  workflow_call:
 
 jobs:
   curl:
