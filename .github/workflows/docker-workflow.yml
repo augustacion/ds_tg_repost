@@ -48,5 +48,4 @@ jobs:
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
   ping:
     uses: ./.github/workflows/ping.yml
-    secrets:
-      YC_CREDS: ${{secrets.YC_CREDS}}
+    secrets: inherit
