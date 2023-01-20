@@ -46,11 +46,3 @@ jobs:
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
             DISCORD_CHANNELS=${{ vars.DISCORD_CHANNELS }}
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
-      - name: IAM Token
-        id: iam-token
-        uses: yc-actions/yc-iam-token@v1
-        with:
-          yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
-      - name: Ping
-        run: >
-          curl -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" -m 20 https://${{ steps.deploy-sls-container.outputs.id }}.containers.yandexcloud.net || :
