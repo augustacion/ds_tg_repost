@@ -46,6 +46,3 @@ jobs:
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
             DISCORD_CHANNELS=${{ vars.DISCORD_CHANNELS }}
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
-      - name: Set repo variables related to container
-        id: set-vars
-        run: echo "::set-env name=CONTAINER_ID::${{ steps.deploy-sls-container.outputs.id }}"

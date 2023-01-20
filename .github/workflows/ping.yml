@@ -16,5 +16,4 @@ jobs:
     - name: Trigger Container
       id: trigger
       run: |
-        bash -c 'while true; do output=$(curl -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" https://serverless-containers.api.cloud.yandex.net/containers/v1/containers\?folder_id\=${{ vars.FOLDER_ID }} | jq ".containers[] | select(.id == \"${{ vars.CONTAINER_ID }}\").status"); if echo $output | grep -q "ACTIVE"; then exit 0; elif echo $output | grep -q "CREATING"; then sleep 1; else exit 1; fi; done'
-        curl -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" -m 20 https://${{ vars.CONTAINER_ID }}.containers.yandexcloud.net || :
+        bash -c 'id=$(curl -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" https://serverless-containers.api.cloud.yandex.net/containers/v1/containers\?folder_id\=${{ vars.FOLDER_ID }} | jq ".containers[] | select(.name == \"${{ vars.CONTAINER_NAME }}\").id"); curl -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" -m 20 https://$(id).containers.yandexcloud.net || :'
