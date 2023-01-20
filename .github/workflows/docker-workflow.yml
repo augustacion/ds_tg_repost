@@ -33,7 +33,7 @@ jobs:
           CR_REGISTRY: $ {{ vars.CR_REGISTRY }}
           CR_REPOSITORY: $ {{ vars.CR_REPOSITORY }}
         with:
-          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDS }}
+          yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
           folder-id: ${{ vars.FOLDER_ID }}
           VM-name: ds2tg-bot
           vm-service-account-id: $ {{ vars.SERVICE_ACCOUNT_ID }}
