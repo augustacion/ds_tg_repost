@@ -24,6 +24,29 @@ jobs:
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
   deploy:
     runs-on: ubuntu-latest
+    steps:
+
+      - name: Deploy COI VM
+        id: deploy-coi
+        uses: yc-actions/yc-coi-deploy@v1
+        env:
+          CR_REGISTRY: $ {{ vars.CR_REGISTRY }}
+          CR_REPOSITORY: $ {{ vars.CR_REPOSITORY }}
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDS }}
+          folder-id: ${{ vars.FOLDER_ID }}
+          VM-name: ds2tg-bot
+          vm-service-account-id: $ {{ vars.SERVICE_ACCOUNT_ID }}
+          vm-cores: 1
+          vm-memory: 512Mb
+          vm-core-fraction: 20
+          vm-subnet-id: default
+
+
+
+'''
+  deploy:
+    runs-on: ubuntu-latest
     needs: build
     steps:
       - uses: actions/checkout@v2
@@ -46,3 +69,4 @@ jobs:
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
             DISCORD_CHANNELS=${{ vars.DISCORD_CHANNELS }}
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
+'''
