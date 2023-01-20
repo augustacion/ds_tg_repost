@@ -46,7 +46,5 @@ jobs:
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
             DISCORD_CHANNELS=${{ vars.DISCORD_CHANNELS }}
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
-      - name: Trigger secondary workflow
-        uses: actions/start-workflow@v2
-        with:
-          workflow_file_name: ping.yml
+      - name: Trigger ping
+        uses: $GITHUB_REPOSITORY/.github/workflows/ping.yml
