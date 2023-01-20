@@ -7,5 +7,3 @@ DISCORD_CHANNELS=ch1@ch2@ch3 // place you channels here separated by @
 ```
 
 Launch: `python main.py` 
-
-After deploying to main deploy also on yandex cloud
