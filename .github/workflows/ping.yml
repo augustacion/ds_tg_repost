@@ -11,9 +11,9 @@ jobs:
     steps:
     - name: IAM Token
       id: iam-token
-      uses: yc-actions/yc-iam-token@v1
       with:
         yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
+      uses: yc-actions/yc-iam-token@v1
     - name: Trigger Container
       id: trigger
       run: |
