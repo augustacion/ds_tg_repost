@@ -2,7 +2,7 @@ name: Curl Request
 
 on:
   schedule:
-    - cron: '*/1 * * * *'
+    - cron: '*/5 * * * *'
   workflow_call:
 
 jobs:
@@ -17,4 +17,4 @@ jobs:
     - name: Trigger Container
       id: trigger
       run: |
-        bash -c 'con_id=$(curl -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" https://serverless-containers.api.cloud.yandex.net/containers/v1/containers\?folder_id\=${{ vars.FOLDER_ID }} | jq -r ".containers[] | select(.name == \"${{ vars.CONTAINER_NAME }}\").id"); curl -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" -m 20 https://$con_id.containers.yandexcloud.net || :'
+        bash -c 'con_id=$(curl -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" https://serverless-containers.api.cloud.yandex.net/containers/v1/containers\?folder_id\=${{ vars.FOLDER_ID }} | jq -r ".containers[] | select(.name == \"${{ vars.CONTAINER_NAME }}\").id"); curl -H "Authorization: Bearer ${{ steps.iam-token.outputs.token }}" -m 600 https://$con_id.containers.yandexcloud.net || :'
