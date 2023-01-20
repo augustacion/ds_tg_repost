@@ -48,4 +48,4 @@ jobs:
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
       - name: Trigger ping
         id: ping
-        uses: $GITHUB_REPOSITORY/.github/workflows/ping.yml@v1
+        uses: ${{vars.GITHUB_REPOSITORY}}/.github/workflows/ping.yml@v1
