@@ -36,6 +36,7 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_CREDS }}
           folder-id: ${{ vars.FOLDER_ID }}
           VM-name: ds2tg-bot
+          user-data-path: .yc_user_data.yml
           vm-service-account-id: $ {{ vars.SERVICE_ACCOUNT_ID }}
           vm-cores: 1
           vm-memory: 512Mb
