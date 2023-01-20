@@ -47,4 +47,5 @@ jobs:
             DISCORD_CHANNELS=${{ vars.DISCORD_CHANNELS }}
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
       - name: Trigger ping
+        id: ping
         uses: $GITHUB_REPOSITORY/.github/workflows/ping.yml
