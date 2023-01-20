@@ -46,6 +46,5 @@ jobs:
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
             DISCORD_CHANNELS=${{ vars.DISCORD_CHANNELS }}
             TELEGRAM_CHANNELS=${{ vars.TELEGRAM_CHANNELS }}
-      - name: Trigger ping
-        id: ping
-        uses: ./.github/workflows/ping.yml
+  ping:
+    uses: ./.github/workflows/ping.yml
